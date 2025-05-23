@@ -1,5 +1,5 @@
 export PATH="/bin:/sbin:/usr/bin:/usr/sbin:/ipbench/usr/bin"
-export PYTHONPATH=$PTHONPATH:/ipbench/usr/lib/python3.12/site-packages/ && \
+export PYTHONPATH=$PTHONPATH:/ipbench/usr/lib/python3.13/site-packages/ && \
 export LD_LIBRARY_PATH=/usr/lib
 
 
