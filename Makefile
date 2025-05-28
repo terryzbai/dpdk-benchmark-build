@@ -50,14 +50,14 @@ $(BUILD_DIR)/host_rootfs.cpio.gz: $(TOOL_DIR)/host_rootfs.cpio.gz $(HOST_ETC_FIL
 	    --etc $(HOST_ETC_FILES)
 
 
-$(BUILD_DIR)/host_linux.dtb: $(TOOL_DIR)/host_linux.dts |$(BUILD_DIR)
-	dtc -q -I dts -O dtb $< > $@
-
-# $(BUILD_DIR)/host_linux.dtb: $(BUILD_DIR)/host_linux.dts |$(BUILD_DIR)
+# $(BUILD_DIR)/host_linux.dtb: $(TOOL_DIR)/host_linux.dts |$(BUILD_DIR)
 # 	dtc -q -I dts -O dtb $< > $@
 
-# $(BUILD_DIR)/host_linux.dts: $(TOOL_DIR)/host_linux.dts $(TOOL_DIR)/host_overlay.dts |$(BUILD_DIR)
-# 	$(TOOL_DIR)/dtscat $^ > $@
+$(BUILD_DIR)/host_linux.dtb: $(BUILD_DIR)/host_linux.dts |$(BUILD_DIR)
+	dtc -q -I dts -O dtb $< > $@
+
+$(BUILD_DIR)/host_linux.dts: $(TOOL_DIR)/host_linux.dts $(TOOL_DIR)/host_overlay.dts |$(BUILD_DIR)
+	$(TOOL_DIR)/dtscat $^ > $@
 
 
 # Geust rootfs includes:
