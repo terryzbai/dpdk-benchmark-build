@@ -12,7 +12,7 @@ CFLAGS_USERLEVEL := \
 	-target aarch64-linux-gnu \
 
 HOST_ETC_FILES := $(addprefix $(BUILD_DIR)/, profile)
-HOST_USER_EXECUTABLES := $(addprefix $(BUILD_DIR)/, echoit guest_linux_image guest_rootfs.cpio.gz sshd_config)
+HOST_USER_EXECUTABLES := $(addprefix $(BUILD_DIR)/, echoit guest_linux_image guest_rootfs.cpio.gz sshd_config test_dpdk_app)
 
 GUEST_ETC_FILES := $(addprefix $(BUILD_DIR)/, profile)
 GUEST_USER_EXECUTABLES := $(addprefix $(BUILD_DIR)/, echoit)
@@ -29,6 +29,9 @@ $(BUILD_DIR)/echoit: $(BUILD_DIR)/echoit.o |$(BUILD_DIR)
 	$(CC_USERLEVEL) -static $(CFLAGS_USERLEVEL) $< -o $@
 
 $(BUILD_DIR)/profile: $(TOOL_DIR)/etc/profile |$(BUILD_DIR)
+	cp $< $@
+
+$(BUILD_DIR)/test_dpdk_app: $(TOOL_DIR)/src/test_dpdk_app |$(BUILD_DIR)
 	cp $< $@
 
 $(BUILD_DIR)/sshd_config: $(TOOL_DIR)/etc/sshd_config |$(BUILD_DIR)
