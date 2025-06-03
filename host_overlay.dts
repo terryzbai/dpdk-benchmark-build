@@ -3,6 +3,13 @@
         bus@30800000 {
 			ethernet@30be0000 {
 				compatible = "fsl,imx8mm-fec-uio";
+
+                mdio {
+					ethernet-phy@0 {
+                        /delete-property/ reset-assert-us;
+                        /delete-property/ reset-deassert-us;
+                    };
+                };
             };
         };
     };
