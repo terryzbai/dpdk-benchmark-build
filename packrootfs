@@ -91,12 +91,12 @@ for file in "${etc_files[@]}"; do
     cp -- "$file" "$tmpdir/etc/$(basename "$file")"
 done
 
-# Copy lib files to /etc
+# Copy lib files to /lib
 for path in "${lib_paths[@]}"; do
     if [ -d "$path" ]; then
-        cp -r "$path"/* "$tmpdir/usr/lib/"
+        cp -rP "$path"/* "$tmpdir/usr/lib/"
     else
-        cp -- "$path" "$tmpdir/usr/lib/$(basename "$file")"
+        cp -P "$path" "$tmpdir/usr/lib/$(basename "$file")"
     fi
 done
 

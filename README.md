@@ -5,7 +5,7 @@
 1. Build rootfs and device tree with Makefile. Run:
 
 ``` 
-make
+make DPDK_LIB=<DPDK_LIB_PATH>
 ```
 
 2. Upload the images to a TFTP server and boot the kernel via U-Boot. Example:
