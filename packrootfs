@@ -14,6 +14,8 @@ tmpdir=$2
 startup_files=()
 home_files=()
 etc_files=()
+lib_paths=()
+sshconf_files=()
 output_rootfs=""
 
 shift 2
@@ -47,6 +49,13 @@ while [[ $# -gt 0 ]]; do
                 shift
             done
             ;;
+        --sshconf)
+            shift
+            while [[ $# -gt 0 ]] && ! [[ $1 == --* ]]; do
+                sshconf_files+=("$1")
+                shift
+            done
+            ;;
         -o)
             shift
             if [[ $# -gt 0 ]]; then
@@ -73,6 +82,7 @@ mkdir -p "$tmpdir"
 mkdir -p "$tmpdir/usr/lib"
 mkdir -p "$tmpdir/root"
 mkdir -p "$tmpdir/etc/init.d"
+mkdir -p "$tmpdir/etc/ssh"
 
 # Copy home files to /root
 for file in "${home_files[@]}"; do
@@ -98,6 +108,10 @@ for path in "${lib_paths[@]}"; do
     else
         cp -P "$path" "$tmpdir/usr/lib/$(basename "$file")"
     fi
+done
+
+for file in "${sshconf_files[@]}"; do
+    cp -- "$file" "$tmpdir/etc/ssh/$(basename "$file")"
 done
 
 if [[ "$output_rootfs" == /* ]]; then

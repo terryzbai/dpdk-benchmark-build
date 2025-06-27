@@ -57,7 +57,8 @@ $(BUILD_DIR)/host_rootfs.cpio.gz: $(TOOL_DIR)/host_rootfs.cpio.gz $(HOST_ETC_FIL
 	$(TOOL_DIR)/packrootfs $(TOOL_DIR)/host_rootfs.cpio.gz \
 	    host_rootfs -o $@ \
 	    --home $(HOST_USER_EXECUTABLES) \
-	    --etc $(HOST_ETC_FILES)
+	    --etc $(HOST_ETC_FILES) \
+	    --sshconf $(BUILD_DIR)/sshd_config
 
 # $(BUILD_DIR)/host_linux.dtb: $(TOOL_DIR)/host_linux.dts |$(BUILD_DIR)
 # 	dtc -q -I dts -O dtb $< > $@
