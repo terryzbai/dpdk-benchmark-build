@@ -16,7 +16,7 @@ CFLAGS_USERLEVEL := \
 	-target aarch64-linux-gnu \
 
 HOST_ETC_FILES := $(addprefix $(BUILD_DIR)/, profile)
-HOST_USER_EXECUTABLES := $(addprefix $(BUILD_DIR)/, echoit guest_linux_image guest_rootfs.cpio.gz sshd_config test_dpdk_app)
+HOST_USER_EXECUTABLES := $(addprefix $(BUILD_DIR)/, echoit guest_linux_image sshd_config test_dpdk_app)
 
 GUEST_ETC_FILES := $(addprefix $(BUILD_DIR)/, profile)
 GUEST_USER_EXECUTABLES := $(addprefix $(BUILD_DIR)/, echoit test_dpdk_app dpdk_devbind.py)
@@ -58,7 +58,8 @@ $(BUILD_DIR)/host_rootfs.cpio.gz: $(TOOL_DIR)/host_rootfs.cpio.gz $(HOST_ETC_FIL
 	    host_rootfs -o $@ \
 	    --home $(HOST_USER_EXECUTABLES) \
 	    --etc $(HOST_ETC_FILES) \
-	    --sshconf $(BUILD_DIR)/sshd_config
+	    --sshconf $(BUILD_DIR)/sshd_config \
+	    --lib $(DPDK_LIB)
 
 # $(BUILD_DIR)/host_linux.dtb: $(TOOL_DIR)/host_linux.dts |$(BUILD_DIR)
 # 	dtc -q -I dts -O dtb $< > $@
