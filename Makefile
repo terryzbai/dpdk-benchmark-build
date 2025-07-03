@@ -16,7 +16,7 @@ CFLAGS_USERLEVEL := \
 	-target aarch64-linux-gnu \
 
 HOST_ETC_FILES := $(addprefix $(BUILD_DIR)/, profile)
-HOST_USER_EXECUTABLES := $(addprefix $(BUILD_DIR)/, echoit guest_linux_image sshd_config test_dpdk_app)
+HOST_USER_EXECUTABLES := $(addprefix $(BUILD_DIR)/, echoit guest_linux_image sshd_config test_dpdk_app dpdk_devbind.py dpdk-testpmd)
 
 GUEST_ETC_FILES := $(addprefix $(BUILD_DIR)/, profile)
 GUEST_USER_EXECUTABLES := $(addprefix $(BUILD_DIR)/, echoit test_dpdk_app dpdk_devbind.py)
@@ -39,6 +39,9 @@ $(BUILD_DIR)/test_dpdk_app: $(TOOL_DIR)/src/test_dpdk_app |$(BUILD_DIR)
 	cp $< $@
 
 $(BUILD_DIR)/dpdk_devbind.py: $(TOOL_DIR)/src/dpdk_devbind.py
+	cp $< $@
+
+$(BUILD_DIR)/dpdk-testpmd: $(TOOL_DIR)/src/dpdk-testpmd
 	cp $< $@
 
 $(BUILD_DIR)/sshd_config: $(TOOL_DIR)/etc/sshd_config |$(BUILD_DIR)
